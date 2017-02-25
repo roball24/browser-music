@@ -1,7 +1,7 @@
 # BrowserMusic - File Definitions
 
-## .pl file
-a .pl file stores song and artwork data for an individual playlist
+## .playlist file
+a .playlist file stores song and artwork data for an individual playlist -- in json format
 
 ```json
 {
@@ -10,14 +10,13 @@ a .pl file stores song and artwork data for an individual playlist
 		"Title": "",
 		"Artist": "",
 		"Album": "",
-		"Artwork": "",
 		"Path": ""
 	}]
 }
 ```
 
 ## .theme file
-a .theme contains application themes, with the properties below
+a .theme contains application themes, with the properties below -- in json format
 
 ```json
 {

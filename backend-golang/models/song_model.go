@@ -1,11 +1,11 @@
 package models
 
 type SongInfo struct {
-	Title   string
-	Artist  string
-	Album   string
-	Artwork string
-	Path    string
+	Title   string `json: "title,omitempty"`
+	Artist  string `json: "artist,omitempty"`
+	Album   string `json: "album,omitempty"`
+	Artwork string `json: "artwork,omitempty"`
+	Path    string `json: "path,omitempty"`
 }
 
 type SongData struct {

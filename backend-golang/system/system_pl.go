@@ -3,6 +3,7 @@ package system
 import (
 	"BrowserMusic/backend-golang/models"
 	"encoding/base64"
+	"encoding/json"
 	id3 "github.com/mikkyang/id3-go"
 	"io/ioutil"
 	"log"
@@ -27,6 +28,9 @@ func (self *SystemPl) Generate() error {
 		return err
 	}
 
+	plist := models.Playlist{}
+	plist.Name = "All_Songs"
+
 	for _, file := range files {
 		if file.Name()[len(file.Name())-4:] != ".mp3" {
 			continue
@@ -47,18 +51,27 @@ func (self *SystemPl) Generate() error {
 			title = file.Name()[:len(file.Name())-4]
 		}
 
-		artwork := tag.Frame("APIC")
-		b64str := ""
-		if artwork != nil {
-			b64str = base64.URLEncoding.EncodeToString(artwork.Bytes())
+		if plist.Artwork == "" {
+			artwork := tag.Frame("APIC")
+			if artwork != nil {
+				plist.Artwork = base64.URLEncoding.EncodeToString(artwork.Bytes())
+			}
 		}
 
 		song := models.SongInfo{}
 		song.Title = title
 		song.Artist = tag.Artist()
 		song.Album = tag.Album()
-		song.Artwork = b64str
+
+		plist.Songs = append(plist.Songs, song)
 	}
+
+	jsonStr, err := json.Marshal(plist)
+	if err != nil {
+		return err
+	}
+
+	ioutil.WriteFile("../data/All_Songs.playlist", jsonStr, 0644)
 
 	return nil
 }
