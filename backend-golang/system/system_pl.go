@@ -36,34 +36,33 @@ func (self *SystemPl) Generate() error {
 			continue
 		}
 
-		// Open file and find tag in it
-		path := dir + "/" + file.Name()
-		tag, err := id3.Open(path)
-		if err != nil {
-			log.Fatal("Error while opening mp3 file tag: ", err)
-			return err
-		}
-		defer tag.Close()
-
 		// title falls back to filename
-		title := tag.Title()
-		if title == "" {
-			title = file.Name()[:len(file.Name())-4]
-		}
+		// title := tag.Title()
+		// if title == "" {
+		// 	title = file.Name()[:len(file.Name())-4]
+		// }
 
 		if plist.Artwork == "" {
+			path := dir + "/" + file.Name()
+			tag, err := id3.Open(path)
+			if err != nil {
+				log.Fatal("Error while opening mp3 file tag: ", err)
+				return err
+			}
+			defer tag.Close()
+
 			artwork := tag.Frame("APIC")
 			if artwork != nil {
 				plist.Artwork = base64.URLEncoding.EncodeToString(artwork.Bytes())
 			}
 		}
 
-		song := models.SongInfo{}
-		song.Title = title
-		song.Artist = tag.Artist()
-		song.Album = tag.Album()
+		// song := models.SongInfo{}
+		// song.Title = title
+		// song.Artist = tag.Artist()
+		// song.Album = tag.Album()
 
-		plist.Songs = append(plist.Songs, song)
+		plist.SongPaths = append(plist.SongPaths, file.Name())
 	}
 
 	jsonStr, err := json.Marshal(plist)

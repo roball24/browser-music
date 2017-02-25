@@ -6,12 +6,7 @@ a .playlist file stores song and artwork data for an individual playlist -- in j
 ```json
 {
 	"artwork": "base64 encoded string",
-	"songs": [{
-		"Title": "",
-		"Artist": "",
-		"Album": "",
-		"Path": ""
-	}]
+	"songPaths": ["path"]
 }
 ```
 
