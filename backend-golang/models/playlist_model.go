@@ -8,7 +8,7 @@ type PlaylistInfo struct {
 
 type Playlist struct {
 	Id        int      `json: "id,omitempty"`
-	Name      string   `json: "name,omitempty"`
+	Name      string   `json: "name,omitempty" binding:"required"`
 	SongPaths []string `json: "songPaths,omitempty"`
 	Artwork   string   `json: "artwork,omitempty"`
 }
