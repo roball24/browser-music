@@ -124,6 +124,7 @@ func (self *SystemPlaylist) GetSongs(pStr string) (*[]models.SongInfo, error) {
 		// get info from mp3 tags
 		tag, err := id3.Open("../library/" + path)
 		if err != nil {
+			tag.Close()
 			continue
 		}
 
