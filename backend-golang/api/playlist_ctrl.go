@@ -9,11 +9,11 @@ import (
 )
 
 type PlaylistController struct {
-	systemPl system.ISystemPl
+	systemPlaylist system.ISystemPlaylist
 }
 
 func (self *PlaylistController) Init(routes *config.Routes) {
-	self.systemPl = system.GetSystemPl()
+	self.systemPlaylist = system.GetSystemPlaylist()
 
 	routes.Public.PUT("/playlist/generate", self.generate)
 	routes.Public.GET("/playlist/songs", self.getSongs)
@@ -21,7 +21,7 @@ func (self *PlaylistController) Init(routes *config.Routes) {
 }
 
 func (self *PlaylistController) generate(c *gin.Context) {
-	err := self.systemPl.Generate()
+	err := self.systemPlaylist.Generate()
 	if err != nil {
 		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
 		return
@@ -34,5 +34,10 @@ func (self *PlaylistController) getSongs(c *gin.Context) {
 }
 
 func (self *PlaylistController) getAll(c *gin.Context) {
-
+	playlists, err := self.systemPlaylist.GetAll()
+	if err != nil {
+		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+	c.JSON(http.StatusOK, playlists)
 }

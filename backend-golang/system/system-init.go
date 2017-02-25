@@ -1,19 +1,19 @@
 package system
 
 var (
-	systemPl    ISystemPl
-	systemTheme ISystemTheme
-	systemMp3   ISystemMp3
+	systemPlaylist ISystemPlaylist
+	systemTheme    ISystemTheme
+	systemMp3      ISystemMp3
 )
 
 func Init() {
-	systemPl = NewSystemPl()
+	systemPlaylist = NewSystemPlaylist()
 	systemTheme = NewSystemTheme()
 	systemMp3 = NewSystemMp3()
 }
 
-func GetSystemPl() ISystemPl {
-	return systemPl
+func GetSystemPlaylist() ISystemPlaylist {
+	return systemPlaylist
 }
 
 func GetSystemTheme() ISystemTheme {
