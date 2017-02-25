@@ -8,6 +8,10 @@ type appError interface {
 	Error() string
 }
 
+type apiError struct {
+	message string
+}
+
 func New(m string) appError {
 	return &apiError{m}
 }
@@ -20,9 +24,7 @@ func Response(c *gin.Context, code int, message string, err interface{}) {
 
 	e, ok := err.(appError)
 	if ok {
-		if e.Include() {
-			message = message + "; " + e.Error()
-		}
+		message = message + "; " + e.Error()
 	}
 
 	c.Abort()
