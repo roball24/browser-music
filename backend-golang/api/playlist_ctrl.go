@@ -22,6 +22,7 @@ func (self *PlaylistController) Init(routes *config.Routes) {
 	routes.Public.POST("/playlist/songs", self.addSong)
 	routes.Public.DELETE("/playlist", self.delete)
 	routes.Public.DELETE("/playlist/songs", self.deleteSong)
+	routes.Public.GET("/playlist/artwork", self.getArtwork)
 }
 
 func (self *PlaylistController) generate(c *gin.Context) {
@@ -121,4 +122,16 @@ func (self *PlaylistController) deleteSong(c *gin.Context) {
 	}
 
 	c.Status(http.StatusOK)
+}
+
+func (self *PlaylistController) getArtwork(c *gin.Context) {
+	playlist := c.DefaultQuery("playlist", "All_Songs")
+
+	artwork, err := self.systemPlaylist.GetArtwork(playlist)
+	if err != nil {
+		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+
+	c.JSON(http.StatusOK, artwork)
 }

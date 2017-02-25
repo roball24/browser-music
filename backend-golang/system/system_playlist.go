@@ -19,6 +19,7 @@ type ISystemPlaylist interface {
 	AddSong(string, string) error
 	Delete(string) error
 	DeleteSong(string, string) error
+	GetArtwork(string) (string, error)
 }
 
 type SystemPlaylist struct{}
@@ -90,7 +91,9 @@ func (self *SystemPlaylist) GetAll() (*[]models.PlaylistInfo, error) {
 			}
 
 			var tempPlst models.Playlist
-			json.Unmarshal(pfile, &tempPlst)
+			if err := json.Unmarshal(pfile, &tempPlst); err != nil {
+				continue
+			}
 
 			plist.Id = tempPlst.Id
 			plist.Name = tempPlst.Name
@@ -112,7 +115,9 @@ func (self *SystemPlaylist) GetSongs(pStr string) (*[]models.SongInfo, error) {
 
 	// get filepaths to songs in playlist
 	var playlist models.Playlist
-	json.Unmarshal(file, &playlist)
+	if err := json.Unmarshal(file, &playlist); err != nil {
+		return nil, err
+	}
 
 	var songs []models.SongInfo
 	for _, path := range playlist.SongPaths {
@@ -170,7 +175,9 @@ func (self *SystemPlaylist) AddSong(pStr string, songPath string) error {
 	}
 
 	var playlist models.Playlist
-	json.Unmarshal(file, &playlist)
+	if err := json.Unmarshal(file, &playlist); err != nil {
+		return err
+	}
 
 	for _, p := range playlist.SongPaths {
 		if songPath == p {
@@ -203,7 +210,9 @@ func (self *SystemPlaylist) DeleteSong(pStr string, songPath string) error {
 	}
 
 	var playlist models.Playlist
-	json.Unmarshal(file, &playlist)
+	if err := json.Unmarshal(file, &playlist); err != nil {
+		return err
+	}
 
 	for i, p := range playlist.SongPaths {
 		if songPath == p {
@@ -222,4 +231,19 @@ func (self *SystemPlaylist) DeleteSong(pStr string, songPath string) error {
 
 	ioutil.WriteFile("../data/"+pStr+".playlist", jsonStr, 0644)
 	return nil
+}
+
+func (self *SystemPlaylist) GetArtwork(pStr string) (string, error) {
+	fullPath := "../data/" + pStr + ".playlist"
+	file, err := ioutil.ReadFile(fullPath)
+	if err != nil {
+		return "", err
+	}
+
+	var playlist models.Playlist
+	if err := json.Unmarshal(file, &playlist); err != nil {
+		return "", err
+	}
+
+	return playlist.Artwork, nil
 }
