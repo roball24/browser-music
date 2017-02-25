@@ -6,6 +6,6 @@ type PlaylistInfo struct {
 }
 
 type Playlist struct {
-	Name string
-	Songs SongInfo[]
+	Name  string
+	Songs []SongInfo
 }

@@ -26,7 +26,6 @@ func (self *PlaylistController) generate(c *gin.Context) {
 		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
 		return
 	}
-
 	c.Status(http.StatusOK)
 }
 

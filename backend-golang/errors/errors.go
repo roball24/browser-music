@@ -24,7 +24,7 @@ func Response(c *gin.Context, code int, message string, err interface{}) {
 
 	e, ok := err.(appError)
 	if ok {
-		message = message + "; " + e.Error()
+		message = e.Error()
 	}
 
 	c.Abort()
