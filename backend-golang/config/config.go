@@ -1,9 +1,7 @@
 package config
 
-import "os"
-
 var (
-	Debug    = os.Getenv("DEBUG")
-	Port     = os.Getenv("PORT")
-	CorsHost = os.Getenv("CORS_HOST")
+	Debug    = "true"
+	Port     = "9090"
+	CorsHost = "http://localhost:8080"
 )

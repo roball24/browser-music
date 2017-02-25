@@ -4,7 +4,6 @@ import (
 	"BrowserMusic/backend-golang/api"
 	"BrowserMusic/backend-golang/config"
 	"BrowserMusic/backend-golang/system"
-	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
