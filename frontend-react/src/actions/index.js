@@ -9,7 +9,10 @@ class RouteActions {
     }
 }
 
+import { ThemeThunks } from './thunks';
+
 // redux-actions
 export {
-	RouteActions
+	RouteActions,
+	ThemeThunks
 };

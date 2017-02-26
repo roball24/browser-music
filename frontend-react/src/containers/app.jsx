@@ -5,11 +5,17 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { routes } from '../constants';
 import { Navigator, HomePage, SettingsPage } from './';
 import DefaultTheme from '../styles';
+import { ThemeThunks } from '../actions';
 
 class App extends React.Component {
+
+	componentWillMount(){
+		this.props.dispatch(ThemeThunks.getTheme());
+	}
+
 	render(){
 		return (
-			<ThemeProvider theme={DefaultTheme}>
+			<ThemeProvider theme={this.props.theme || DefaultTheme}>
 				<Router history={browserHistory}>
 					<Route path={routes.HOME} component={Navigator}>
 						<IndexRoute component={HomePage} />
