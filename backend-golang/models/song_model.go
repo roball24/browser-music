@@ -7,8 +7,3 @@ type SongInfo struct {
 	Artwork string `json: "artwork,omitempty"`
 	Path    string `json: "path,omitempty"`
 }
-
-type SongData struct {
-	Title string
-	Data  string // base64 enc string
-}

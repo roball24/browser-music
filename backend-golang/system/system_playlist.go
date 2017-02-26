@@ -13,7 +13,7 @@ import (
 
 type ISystemPlaylist interface {
 	Generate() error
-	GetAll() (*[]models.PlaylistInfo, error)
+	GetAll() (*[]models.Playlist, error)
 	GetSongs(string) (*[]models.SongInfo, error)
 	Add(string) error
 	AddSong(string, string) error
@@ -69,7 +69,7 @@ func (self *SystemPlaylist) Generate() error {
 	return nil
 }
 
-func (self *SystemPlaylist) GetAll() (*[]models.PlaylistInfo, error) {
+func (self *SystemPlaylist) GetAll() (*[]models.Playlist, error) {
 	dir := "../data"
 
 	files, err := ioutil.ReadDir(dir)
@@ -77,11 +77,10 @@ func (self *SystemPlaylist) GetAll() (*[]models.PlaylistInfo, error) {
 		return nil, err
 	}
 
-	var plists []models.PlaylistInfo
+	var plists []models.Playlist
 
 	for _, file := range files {
 		if file.Name()[len(file.Name())-9:] == ".playlist" {
-			plist := models.PlaylistInfo{}
 
 			// get artwork for playlist
 			path := dir + "/" + file.Name()
@@ -90,20 +89,17 @@ func (self *SystemPlaylist) GetAll() (*[]models.PlaylistInfo, error) {
 				continue // skip file
 			}
 
-			var tempPlst models.Playlist
-			if err := json.Unmarshal(pfile, &tempPlst); err != nil {
+			var plist models.Playlist
+			if err := json.Unmarshal(pfile, &plist); err != nil {
 				continue
 			}
 
-			plist.Id = tempPlst.Id
-			plist.Name = tempPlst.Name
-			// plist.Artwork = tempPlst.Artwork
+			plist.SongPaths = nil
+			plist.Artwork = ""
 
 			plists = append(plists, plist)
 		}
-
 	}
-
 	return &plists, nil
 }
 
