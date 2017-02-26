@@ -1,10 +1,10 @@
-import App from './app.jsx';
+import Routing from './routing.jsx';
 import Navigator from './navigator.jsx';
 import HomePage from './home-page.jsx';
 import SettingsPage from './settings-page.jsx';
 
 export {
-	App,
+	Routing,
 	Navigator,
 	HomePage,
 	SettingsPage

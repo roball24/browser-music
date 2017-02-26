@@ -2,6 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RouteActions } from '../actions';
 import { routes } from '../constants';
+import { Sidebar } from '../components';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+`
+
+const MainWrapper = styled.div`
+    display: flex;
+    flex: 3;
+    overflow-y: scroll;
+    height: 100%
+`
 
 class HomePage extends React.Component {
 
@@ -11,7 +26,11 @@ class HomePage extends React.Component {
 
     render () {
         return (
-            <div>Home</div>
+            <Container>
+                <Sidebar />
+                <MainWrapper>
+                </MainWrapper>
+            </Container>
         );
     }
 }

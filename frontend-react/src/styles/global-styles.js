@@ -13,6 +13,10 @@ body {
 	color: #333;
 }
 
+#app {
+	height: 100%;
+}
+
 *:focus { outline: none; }
 
 * { box-sizing: border-box; }

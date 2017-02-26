@@ -11,7 +11,15 @@ const arrayState = {
 	data: []
 };
 
+const objectState = {
+	fetching: false,
+	fetched: false,
+	error: null,
+	data: {}
+};
+
 export {
 	defaultState,
-	arrayState
+	arrayState,
+	objectState
 }
