@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { PlaylistThunks } from '../actions';
-import { SidebarItem } from './';
+import { SidebarItem, AddPlaylistItem } from './';
 
 const Wrapper = styled.div`
     display: flex;
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
-    min-height: 102%;
+    min-height: 101%;
     position: relative;
     width: 100%;
 `
@@ -46,9 +46,10 @@ class Sidebar extends React.Component {
         return (
             <Wrapper>
                 <Container>
-                {this.props.playlists.map(plst => {
-                    return (<SidebarItem key={plst.Name} plst={plst}/>)
-                })}
+                    {this.props.playlists.map(plst => {
+                        return (<SidebarItem key={plst.Name} plst={plst}/>)
+                    })}
+                    <AddPlaylistItem/>
                 </Container>
             </Wrapper>
         );
