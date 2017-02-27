@@ -15,6 +15,8 @@ body {
 
 #app {
 	height: 100%;
+	overflow:hidden;
+	position: fixed;
 }
 
 *:focus { outline: none; }

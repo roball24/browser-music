@@ -15,6 +15,7 @@ const Item = styled.div`
     margin: 3px 0px;
     vertical-align: middle;
     position: relative;
+    cursor: pointer;
 
     &:hover {
         filter: brightness(150%);
@@ -34,7 +35,7 @@ const ItemImage = styled.div`
 const ItemContent = styled.div`
     display: inline-block;
     position: relative;
-    top: -22px;
+    top: -18px;
     padding-left: 20px;
     font-size: 20px;
 `
@@ -48,7 +49,7 @@ class SidebarItem extends React.Component {
 
 	render () {
 		var imgUrl = '';
-		if (this.props.plst.Artwork.size){
+		if (this.props.plst.Artwork && this.props.plst.Artwork.size){
 			imgUrl = URL.createObjectURL(this.props.plst.Artwork);
 		}
 		return (
@@ -59,7 +60,7 @@ class SidebarItem extends React.Component {
 					}
 				</ItemImage>
 				<ItemContent>
-					{this.props.plst.Name.replace("_", " ")}
+					{this.props.plst.Name.replace('_', ' ')}
 				</ItemContent>
 			</Item>
 		);

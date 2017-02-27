@@ -15,7 +15,7 @@ const MainWrapper = styled.div`
     display: flex;
     flex: 3;
     overflow-y: scroll;
-    height: 100%
+    height: 100%;
 `
 
 class HomePage extends React.Component {

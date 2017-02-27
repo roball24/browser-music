@@ -1,7 +1,7 @@
 import { reduxActions } from '../../constants';
 
 export default class PlaylistPureActions {
-	// GET theme
+	// GET all playlists
 	static getAllRequest(){
 		return {
 			type: reduxActions.GET_ALL_PLAYLISTS_REQUEST
@@ -42,6 +42,29 @@ export default class PlaylistPureActions {
 		return {
 			type: reduxActions.RETURN_PLAYLIST_ARTWORK,
 			data,
+			playlist
+		}
+	}
+
+	// POST playlist
+	static addRequest(playlist){
+		return {
+			type: reduxActions.ADD_PLAYLIST_REQUEST,
+			playlist
+		}
+	}
+
+	static addFailure(playlist, error) {
+		return {
+			type: reduxActions.ADD_PLAYLIST_ERROR,
+			playlist,
+			error
+		}
+	}
+
+	static addSuccess(playlist) {
+		return {
+			type: reduxActions.ADD_PLAYLIST_SUCCESS,
 			playlist
 		}
 	}

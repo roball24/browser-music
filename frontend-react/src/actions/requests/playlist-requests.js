@@ -16,4 +16,12 @@ export default class PlaylistRequests {
 			{ method: 'get' }
 		)
 	}
+
+	static add(params){
+		var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
+		return fetch(
+			endpoints.PLAYLIST + '?' + paramString, 
+			{ method: 'post' }
+		)
+	}
 }

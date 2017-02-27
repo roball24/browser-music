@@ -29,4 +29,17 @@ export default class PlaylistThunks {
 			})
 		}
 	}
+
+	static add(playlist){
+		return dispatch => {
+			dispatch(PlaylistPureActions.addRequest(playlist));
+			return PlaylistRequests.add({playlist}).then(response => {
+				if (response.status == 200) {
+					dispatch(PlaylistPureActions.addSuccess(playlist));
+				} else {
+					dispatch(PlaylistPureActions.addFailure(playlist, response))
+				}
+			})
+		}
+	}
 }
