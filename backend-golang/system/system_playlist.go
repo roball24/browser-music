@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	id3 "github.com/mikkyang/id3-go"
+	"github.com/mikkyang/id3-go/v2"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -19,7 +20,7 @@ type ISystemPlaylist interface {
 	AddSong(string, string) error
 	Delete(string) error
 	DeleteSong(string, string) error
-	GetArtwork(string) (string, error)
+	GetArtwork(string) ([]byte, error)
 }
 
 type SystemPlaylist struct{}
@@ -65,7 +66,6 @@ func (self *SystemPlaylist) Generate() error {
 	}
 
 	ioutil.WriteFile("../data/All_Songs.playlist", jsonStr, 0644)
-
 	return nil
 }
 
@@ -230,17 +230,33 @@ func (self *SystemPlaylist) DeleteSong(pStr string, songPath string) error {
 	return nil
 }
 
-func (self *SystemPlaylist) GetArtwork(pStr string) (string, error) {
+func (self *SystemPlaylist) GetArtwork(pStr string) ([]byte, error) {
+	// load playlist file at pStr in data directory
+	pStr = strings.Replace(pStr, " ", "_", -1)
 	fullPath := "../data/" + pStr + ".playlist"
+
 	file, err := ioutil.ReadFile(fullPath)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	var playlist models.Playlist
 	if err := json.Unmarshal(file, &playlist); err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return playlist.Artwork, nil
+	if len(playlist.SongPaths) == 0 {
+		return nil, nil
+	}
+
+	// return artwork of first song in playlist
+	tag, err := id3.Open("../library/" + playlist.SongPaths[0])
+	defer tag.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	artwork := tag.Frame("APIC").(*v2.ImageFrame).DataFrame.Data()
+
+	return artwork, nil
 }

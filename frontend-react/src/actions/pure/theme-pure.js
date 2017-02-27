@@ -15,10 +15,10 @@ export default class ThemePureActions {
 		}
 	}
 
-	static returnTheme(theme) {
+	static returnTheme(data) {
 		return {
 			type: reduxActions.RETURN_THEME,
-			theme
+			data
 		}
 	}
 }

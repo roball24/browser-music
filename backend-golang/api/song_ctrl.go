@@ -50,5 +50,5 @@ func (self *SongController) getArtwork(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, artwork)
+	c.Data(http.StatusOK, "image", artwork)
 }

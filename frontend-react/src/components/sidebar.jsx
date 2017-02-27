@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { PlaylistThunks } from '../actions';
+import { SidebarItem } from './';
 
 const Wrapper = styled.div`
     display: flex;
     overflow-y: scroll;
-    width: 500px;
+    max-width: 350px;
+    min-width: 300px;
     height: 100%;
     flex: 1;
     background-color: ${props => props.theme.Background2};
 
     &::-webkit-scrollbar {
+        width: 10px;
         background-color: inherit;
         padding-right: 1px;
     }
@@ -24,29 +28,36 @@ const Wrapper = styled.div`
         border-radius: 10px;
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
         background-color: ${props => props.theme.Primary1};
-
     }
 `
 
 const Container = styled.div`
-    min-height: 110%;
+    min-height: 102%;
+    position: relative;
+    width: 100%;
 `
 
 class Sidebar extends React.Component {
+    componentWillMount(){
+        this.props.dispatch(PlaylistThunks.getAll())
+    }
+
     render () {
         return (
             <Wrapper>
                 <Container>
-                    
+                {this.props.playlists.map(plst => {
+                    return (<SidebarItem key={plst.Name} plst={plst}/>)
+                })}
                 </Container>
             </Wrapper>
         );
     }
 }
 
-function select(/*state*/){
+function select(state){
     return {
-        
+        playlists: state.playlists.data
     }
 }
 

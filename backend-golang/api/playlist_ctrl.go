@@ -125,7 +125,7 @@ func (self *PlaylistController) deleteSong(c *gin.Context) {
 }
 
 func (self *PlaylistController) getArtwork(c *gin.Context) {
-	playlist := c.DefaultQuery("playlist", "All_Songs")
+	playlist := c.DefaultQuery("playlist", "All Songs")
 
 	artwork, err := self.systemPlaylist.GetArtwork(playlist)
 	if err != nil {
@@ -133,5 +133,5 @@ func (self *PlaylistController) getArtwork(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, artwork)
+	c.Data(http.StatusOK, "image", artwork)
 }
