@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RouteActions } from '../actions';
 import { routes } from '../constants';
-import { Sidebar, ContentBar } from '../components';
+import { Sidebar, ContentBar, SongList } from '../components';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const MainWrapper = styled.div`
     display: flex;
+    flex-direction: column;
     flex: 3;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -33,6 +34,7 @@ class HomePage extends React.Component {
                 <Sidebar />
                 <MainWrapper>
                     <ContentBar/>
+                    <SongList />
                 </MainWrapper>
             </Container>
         );
