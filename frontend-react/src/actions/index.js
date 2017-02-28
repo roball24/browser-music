@@ -9,7 +9,7 @@ class RouteActions {
     }
 }
 
-import { ThemeThunks, PlaylistThunks } from './thunks';
+import { ThemeThunks, PlaylistThunks, SongThunks } from './thunks';
 import { PlaylistPureActions } from './pure';
 
 // redux-actions
@@ -17,5 +17,6 @@ export {
 	RouteActions,
 	ThemeThunks,
 	PlaylistThunks,
-	PlaylistPureActions
+	PlaylistPureActions,
+    SongThunks
 };

@@ -104,6 +104,7 @@ func (self *SystemPlaylist) GetAll() (*[]models.Playlist, error) {
 }
 
 func (self *SystemPlaylist) GetSongs(pStr string) (*[]models.SongInfo, error) {
+	pStr = strings.Replace(pStr, " ", "_", -1)
 	file, err := ioutil.ReadFile("../data/" + pStr + ".playlist")
 	if err != nil {
 		return nil, err
@@ -127,7 +128,7 @@ func (self *SystemPlaylist) GetSongs(pStr string) (*[]models.SongInfo, error) {
 		// title falls back to filename
 		title := tag.Title()
 		if title == "" {
-			title = pStr[:len(pStr)-4]
+			title = path[:len(pStr)-4]
 		}
 
 		var song models.SongInfo

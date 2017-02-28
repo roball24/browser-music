@@ -4,6 +4,7 @@ import (
 	"BrowserMusic/backend-golang/config"
 	"BrowserMusic/backend-golang/errors"
 	"BrowserMusic/backend-golang/system"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -44,7 +45,8 @@ func (self *PlaylistController) getAll(c *gin.Context) {
 }
 
 func (self *PlaylistController) getSongs(c *gin.Context) {
-	playlist := c.DefaultQuery("playlist", "All_Songs")
+	playlist := c.DefaultQuery("playlist", "All Songs")
+	fmt.Println(playlist)
 	songs, err := self.systemPlaylist.GetSongs(playlist)
 	if err != nil {
 		errors.Response(c, http.StatusInternalServerError, err.Error(), err)

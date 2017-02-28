@@ -1,21 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { SongThunks } from '../actions';
 
 const Container = styled.div`
-	display: block;
-	flex: 1;
-	min-width: 100%;
-	width: content-max;
-	height: 35px;
 	background-color: ${props => props.theme.Secondary3};
-	padding: 0px 10px;
+	padding: 0px 15px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+        width: 8px;
+        background-color: inherit;
+        padding-right: 1px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: ${props => props.theme.Primary1};
+    }
 `
 
 const H3 = styled.h3`
 	color: ${props => props.theme.Background1};
 	margin: 0;
-	margin-left: 5px;
 	line-height: 35px;
 	min-width: max-content;
 	display: inline;
@@ -27,11 +35,18 @@ class SongList extends React.Component {
 		this.state = {}
 	}
 
+	componentWillMount(){
+		this.props.dispatch(SongThunks.getAllPlaylist(this.props.currentPlaylist));
+	}
+
 	render () {
 		return (
 			<Container>
 				<H3>{this.props.currentPlaylist}</H3>
-				
+				{this.props.songs.data[this.props.currentPlaylist]
+					&& this.props.songs.data[this.props.currentPlaylist].map((song, idx) => {
+					return (<p style={{color: 'white'}} key={idx}>{song.Title}</p>)
+				})}
 			</Container>
 		);
 	}
@@ -39,7 +54,8 @@ class SongList extends React.Component {
 
 function select(state){
 	return {
-		currentPlaylist: state.currentPlaylist
+		currentPlaylist: state.currentPlaylist,
+		songs: state.songs
 	}
 }
 

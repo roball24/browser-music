@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reduxActions } from '../constants';
 import { getTheme } from './theme-reducer.js';
 import { currentPlaylist, playlists, addPlaylistState } from './playlist-reducer.js';
+import { songs } from './song-reducer.js';
 
 function currentRoute(state = '', action) {
     switch (action.type) {
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
 	getTheme,
 	currentPlaylist,
     playlists,
-	addPlaylistState
+	addPlaylistState,
+    songs
 });
 
 export default rootReducer;

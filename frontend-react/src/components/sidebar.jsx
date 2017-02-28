@@ -7,10 +7,8 @@ import { SidebarItem, AddPlaylistItem } from './';
 const Wrapper = styled.div`
     display: flex;
     overflow-y: scroll;
-    max-width: 320px;
-    min-width: 300px;
+    width: 300px;
     height: 100%;
-    flex: 1;
     background-color: ${props => props.theme.Background2};
 
     &::-webkit-scrollbar {

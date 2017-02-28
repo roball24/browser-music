@@ -12,8 +12,7 @@ const scrollLeft = keyframes`
 
 const Container = styled.div`
 	display: block;
-	min-width: 100%;
-	width: content-max;
+	width: 100%;
 	height: 35px;
 	background-color: ${props => props.theme.Secondary3};
 	padding: 0px 10px;
@@ -85,7 +84,7 @@ class ContentBar extends React.Component {
 				<Link to={routes.SETTINGS}>
 					<Icon version="1.1" id="Layer_1" x="0px" y="0px"
 						viewBox="0 0 1792 1792" enable-background="new 0 0 1792 1792">
-					<path d="M1152,896c0-70.7-25-131-75-181s-110.3-75-181-75s-131,25-181,75s-75,110.3-75,181s25,131,75,181s110.3,75,181,75
+						<path d="M1152,896c0-70.7-25-131-75-181s-110.3-75-181-75s-131,25-181,75s-75,110.3-75,181s25,131,75,181s110.3,75,181,75
 						s131-25,181-75S1152,966.7,1152,896z M1664,787v222c0,8-2.7,15.7-8,23s-12,11.7-20,13l-185,28c-12.7,36-25.7,66.3-39,91
 						c23.3,33.3,59,79.3,107,138c6.7,8,10,16.3,10,25s-3,16.3-9,23c-18,24.7-51,60.7-99,108s-79.3,71-94,71c-8,0-16.7-3-26-9l-138-108
 						c-29.3,15.3-59.7,28-91,38c-10.7,90.7-20.3,152.7-29,186c-4.7,18.7-16.7,28-36,28H785c-9.3,0-17.5-2.8-24.5-8.5

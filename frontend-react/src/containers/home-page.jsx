@@ -7,19 +7,17 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
-    width: 100%;
     height: 100%;
-    overflow-y: hidden;
+    overflow: hidden;
+    position: relative;
 `
 
 const MainWrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex: 3;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     height: 100%;
-    width: 100%;
 `
 
 class HomePage extends React.Component {
