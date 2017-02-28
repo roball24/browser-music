@@ -6,7 +6,7 @@ import { SidebarItem, AddPlaylistItem } from './';
 
 const Wrapper = styled.div`
     display: flex;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 300px;
     height: 100%;
     background-color: ${props => props.theme.Background2};
@@ -25,7 +25,6 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
-    min-height: 101%;
     position: relative;
     width: 100%;
 `
