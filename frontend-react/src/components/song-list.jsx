@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { SongThunks } from '../actions';
+import { SongListItem } from '../components';
 
 const Container = styled.div`
-	background-color: ${props => props.theme.Secondary3};
-	padding: 0px 15px;
+	background-color: ${props => props.theme.Secondary2};
 	overflow-y: auto;
 	flex: 1;
 
@@ -25,7 +25,8 @@ const Container = styled.div`
 const H3 = styled.h3`
 	color: ${props => props.theme.Background1};
 	margin: 0;
-	line-height: 35px;
+	margin: 15px;
+	line-height: 70px;
 	min-width: max-content;
 	display: inline;
 `
@@ -52,7 +53,7 @@ class SongList extends React.Component {
 				<H3>{this.props.currentPlaylist}</H3>
 				{this.props.songs.data[this.props.currentPlaylist]
 					&& this.props.songs.data[this.props.currentPlaylist].map((song, idx) => {
-					return (<p style={{color: 'white'}} key={idx}>{song.Title}</p>)
+					return (<SongListItem key={idx} index={idx} songData={song}/>)
 				})}
 			</Container>
 		);
