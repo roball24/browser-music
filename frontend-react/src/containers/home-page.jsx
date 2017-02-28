@@ -16,6 +16,7 @@ const MainWrapper = styled.div`
     display: flex;
     flex: 3;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
 `
