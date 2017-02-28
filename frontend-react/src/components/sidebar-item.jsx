@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { PlaylistThunks } from '../actions';
+import { PlaylistThunks, PlaylistPureActions } from '../actions';
 import styled from 'styled-components';
 
 const Image = styled.img`
@@ -16,6 +16,7 @@ const Item = styled.div`
     vertical-align: middle;
     position: relative;
     cursor: pointer;
+	${props => props.selected ? 'filter: brightness(150%);' : ''}
 
     &:hover {
         filter: brightness(150%);
@@ -41,10 +42,19 @@ const ItemContent = styled.div`
 `
 
 class SidebarItem extends React.Component {
+	constructor(){
+		super();
+		this.selectPlaylist = this.selectPlaylist.bind(this);
+	}
+
 	componentWillMount(){
 		if (!this.props.plst.fetchingArtwork && !this.props.plst.fetchedArtwork){
 			this.props.dispatch(PlaylistThunks.getArtwork(this.props.plst.Name));
 		}
+	}
+
+	selectPlaylist(){
+		this.props.dispatch(PlaylistPureActions.selectPlaylist(this.props.plst.Name));
 	}
 
 	render () {
@@ -53,7 +63,10 @@ class SidebarItem extends React.Component {
 			imgUrl = URL.createObjectURL(this.props.plst.Artwork);
 		}
 		return (
-			<Item>
+			<Item 
+				onClick={this.selectPlaylist} 
+				selected={this.props.currentPlaylist == this.props.plst.Name}
+			>
 				<ItemImage>
 					{imgUrl &&
 						<Image src={imgUrl}/>
@@ -69,7 +82,8 @@ class SidebarItem extends React.Component {
 
 function select(state){
 	return {
-		playlists: state.playlists.data
+		playlists: state.playlists.data,
+		currentPlaylist: state.currentPlaylist
 	}
 }
 

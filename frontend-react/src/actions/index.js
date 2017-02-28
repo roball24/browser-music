@@ -10,10 +10,12 @@ class RouteActions {
 }
 
 import { ThemeThunks, PlaylistThunks } from './thunks';
+import { PlaylistPureActions } from './pure';
 
 // redux-actions
 export {
 	RouteActions,
 	ThemeThunks,
-	PlaylistThunks
+	PlaylistThunks,
+	PlaylistPureActions
 };

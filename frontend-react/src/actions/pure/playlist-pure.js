@@ -1,6 +1,14 @@
 import { reduxActions } from '../../constants';
 
 export default class PlaylistPureActions {
+	// set current song
+	static selectPlaylist(playlist){
+		return {
+			type: reduxActions.SELECTED_PLAYLIST,
+			playlist
+		}
+	}
+
 	// GET all playlists
 	static getAllRequest(){
 		return {

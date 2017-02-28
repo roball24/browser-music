@@ -1,6 +1,15 @@
 import { reduxActions } from '../constants';
 import { arrayState, defaultState } from './initial-states.js';
 
+export function currentPlaylist(state = 'All Songs', action){
+	switch (action.type){
+		case reduxActions.SELECTED_PLAYLIST:
+			return action.playlist;
+		default:
+			return state;
+	}
+}
+
 export function playlists(state = arrayState, action) {
 	switch (action.type){
 		// get all playlists
