@@ -7,6 +7,7 @@ const Container = styled.div`
 	background-color: ${props => props.theme.Secondary3};
 	padding: 0px 15px;
 	overflow-y: auto;
+	flex: 1;
 
 	&::-webkit-scrollbar {
         width: 8px;
@@ -33,6 +34,12 @@ class SongList extends React.Component {
 	constructor(){
 		super();
 		this.state = {}
+	}
+
+	componentWillReceiveProps(nextProps){
+		if (this.props.currentPlaylist != nextProps.currentPlaylist){
+			this.props.dispatch(SongThunks.getAllPlaylist(nextProps.currentPlaylist));
+		}
 	}
 
 	componentWillMount(){

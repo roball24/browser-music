@@ -44,6 +44,7 @@ const ItemContent = styled.div`
 class SidebarItem extends React.Component {
 	constructor(){
 		super();
+		this.state = { imgUrl: '' }
 		this.selectPlaylist = this.selectPlaylist.bind(this);
 	}
 
@@ -58,9 +59,8 @@ class SidebarItem extends React.Component {
 	}
 
 	render () {
-		var imgUrl = '';
 		if (this.props.plst.Artwork && this.props.plst.Artwork.size){
-			imgUrl = URL.createObjectURL(this.props.plst.Artwork);
+			this.state.imgUrl = URL.createObjectURL(this.props.plst.Artwork);
 		}
 		return (
 			<Item 
@@ -68,8 +68,8 @@ class SidebarItem extends React.Component {
 				selected={this.props.currentPlaylist == this.props.plst.Name}
 			>
 				<ItemImage>
-					{imgUrl &&
-						<Image src={imgUrl}/>
+					{this.state.imgUrl &&
+						<Image src={this.state.imgUrl}/>
 					}
 				</ItemImage>
 				<ItemContent>
