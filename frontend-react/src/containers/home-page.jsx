@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RouteActions } from '../actions';
 import { routes } from '../constants';
-import { Sidebar } from '../components';
+import { Sidebar, ContentBar } from '../components';
 import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
+    width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: hidden;
 `
 
 const MainWrapper = styled.div`
@@ -16,6 +17,7 @@ const MainWrapper = styled.div`
     flex: 3;
     overflow-y: scroll;
     height: 100%;
+    width: 100%;
 `
 
 class HomePage extends React.Component {
@@ -29,6 +31,7 @@ class HomePage extends React.Component {
             <Container>
                 <Sidebar />
                 <MainWrapper>
+                    <ContentBar/>
                 </MainWrapper>
             </Container>
         );

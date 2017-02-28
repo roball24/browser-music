@@ -15,7 +15,7 @@ body {
 
 #app {
 	height: 100%;
-	overflow:hidden;
+	width: 100%;
 	position: fixed;
 }
 

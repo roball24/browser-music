@@ -7,7 +7,7 @@ import { SidebarItem, AddPlaylistItem } from './';
 const Wrapper = styled.div`
     display: flex;
     overflow-y: scroll;
-    max-width: 350px;
+    max-width: 320px;
     min-width: 300px;
     height: 100%;
     flex: 1;
