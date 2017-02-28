@@ -14,14 +14,9 @@ const Wrapper = styled.div`
     background-color: ${props => props.theme.Background2};
 
     &::-webkit-scrollbar {
-        width: 10px;
+        width: 8px;
         background-color: inherit;
         padding-right: 1px;
-    }
-
-    &::-webkit-scrollbar-track {
-        border-left: 1px solid ${props => props.theme.Secondary1};
-        border-right: 1px solid ${props => props.theme.Secondary1};
     }
 
     &::-webkit-scrollbar-thumb {
