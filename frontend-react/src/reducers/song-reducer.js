@@ -29,42 +29,42 @@ export function songs(state = objectState, action) {
 			songState.data[action.playlist] = action.data;
 			return songState;
 
+		// get playlist artwork
+		case reduxActions.GET_SONG_ARTWORK_REQUEST:
+			var artworkRState = {...state };
+			artworkRState.data[action.playlist].map(s => {
+				if (s.Path == action.song){
+					s.fetchingArtwork = true;
+					s.fetchedArtwork = false;
+					s.artError = null;
+				}
+				return s;
+			});
+			return artworkRState;
 
+		case reduxActions.GET_SONG_ARTWORK_ERROR:
+			var artworkEState = {...state };
+			artworkEState.data[action.playlist].map(s => {
+				if (s.Path == action.song){
+					s.fetchingArtwork = false;
+					s.fetchedArtwork = false;
+					s.artError = action.error.status;
+				}
+				return s;
+			});
+			return artworkEState;
 
-		// // get playlist artwork
-		// case reduxActions.GET_PLAYLIST_ARTWORK_REQUEST:
-		// 	return {...state, 
-		// 			data: state.data.map(d => {
-		// 				if (d.Name == action.playlist) {
-		// 					d.fetchingArtwork = true;
-		// 					d.fetchedArtwork = false;
-		// 				}
-		// 				return d
-		// 			})
-		// 		};
-
-		// case reduxActions.GET_PLAYLIST_ARTWORK_ERROR:
-		// 	return {...state, 
-		// 			data: state.data.map(d => {
-		// 				if (d.Name == action.playlist) {
-		// 					d.fetchingArtwork = false;
-		// 					d.fetchedArtwork = false;
-		// 				}
-		// 				return d
-		// 			})
-		// 		};
-
-		// case reduxActions.RETURN_PLAYLIST_ARTWORK:
-		// 	return {...state, 
-		// 			data: state.data.map(d => {
-		// 				if (d.Name == action.playlist) {
-		// 					d.fetchingArtwork = false;
-		// 					d.fetchedArtwork = true;
-		// 					d.Artwork = action.data;
-		// 				}
-		// 				return d
-		// 			})
-		// 		};
+		case reduxActions.RETURN_SONG_ARTWORK:
+			var retArtworkState = {...state };
+			retArtworkState.data[action.playlist].map(s => {
+				if (s.Path == action.song){
+					s.fetchingArtwork = false;
+					s.fetchedArtwork = true;
+					s.Artwork = action.data;
+				}
+				return s;
+			});
+			return retArtworkState;
 
 		default:
 			return state;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { SongThunks } from '../actions';
 
 const Container = styled.div`
 	padding: 5px 10px;
@@ -24,11 +25,38 @@ const ItemImage = styled.div`
  	display: inline-block;
 `
 
+const Image = styled.img`
+	height: 100%;
+	width: 100%;
+`
+
 class SongListItem extends React.Component {
+	constructor(){
+		super();
+		this.state = { imgUrl: '' };
+	}
+
+	componentWillMount(){
+		console.log(this.props.songData)
+		if (!this.props.songData.Artwork && !this.props.songData.fetchingArtwork 
+			&& !this.props.songData.fetchedArtwork && !this.props.songData.artworkError){
+			this.props.dispatch(
+				SongThunks.getArtwork(this.props.currentPlaylist, this.props.songData.Path)
+			);
+		}
+	}
+
 	render(){
+		if (this.props.songData.Artwork && this.props.songData.Artwork.size){
+			this.state.imgUrl = URL.createObjectURL(this.props.songData.Artwork);
+		}
 		return (
 			<Container index={this.props.index}>
-				<ItemImage></ItemImage>
+				<ItemImage>
+					{this.state.imgUrl &&
+						<Image src={this.state.imgUrl}/>
+					}
+				</ItemImage>
 				<Text>{this.props.songData.Title}</Text>
 				<Text>{this.props.songData.Artist}</Text>
 				<Text>{this.props.songData.Album}</Text>
@@ -37,9 +65,10 @@ class SongListItem extends React.Component {
 	}
 }
 
-function select(/*state*/){
+function select(state){
 	return {
-
+		currentPlaylist: state.currentPlaylist,
+		songs: state.songs
 	}
 }
 

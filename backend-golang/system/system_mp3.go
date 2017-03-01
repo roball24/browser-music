@@ -1,6 +1,7 @@
 package system
 
 import (
+	"BrowserMusic/backend-golang/errors"
 	"encoding/base64"
 	id3 "github.com/mikkyang/id3-go"
 	"github.com/mikkyang/id3-go/v2"
@@ -25,8 +26,11 @@ func (self *SystemMp3) GetArtwork(path string) ([]byte, error) {
 		return nil, err
 	}
 
-	artwork := tag.Frame("APIC").(*v2.ImageFrame).DataFrame.Data()
-	return artwork, nil
+	if artwork := tag.Frame("APIC"); artwork != nil {
+		return artwork.(*v2.ImageFrame).DataFrame.Data(), nil
+	}
+
+	return nil, errors.New("Artwork frame is nil")
 }
 
 func (self *SystemMp3) Load(path string) (string, error) {

@@ -44,7 +44,7 @@ const ItemContent = styled.div`
 class SidebarItem extends React.Component {
 	constructor(){
 		super();
-		this.state = { imgUrl: '' }
+		this.state = { imgUrl: '' };
 		this.selectPlaylist = this.selectPlaylist.bind(this);
 	}
 

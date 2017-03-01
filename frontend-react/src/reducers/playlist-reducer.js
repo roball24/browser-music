@@ -44,6 +44,7 @@ export function playlists(state = arrayState, action) {
 						if (d.Name == action.playlist) {
 							d.fetchingArtwork = true;
 							d.fetchedArtwork = false;
+							d.artError = null;
 						}
 						return d
 					})
@@ -55,6 +56,7 @@ export function playlists(state = arrayState, action) {
 						if (d.Name == action.playlist) {
 							d.fetchingArtwork = false;
 							d.fetchedArtwork = false;
+							d.artError = action.error.status;
 						}
 						return d
 					})

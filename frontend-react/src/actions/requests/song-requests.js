@@ -10,11 +10,11 @@ export default class SongRequests {
 		)
 	}
 
-	// static getArtwork(params){
-	// 	var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
-	// 	return fetch(
-	// 		endpoints.SONG + '/artwork?' + paramString, 
-	// 		{ method: 'get' }
-	// 	)
-	// }
+	static getArtwork(params){
+		var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
+		return fetch(
+			endpoints.SONG + '/artwork?' + paramString, 
+			{ method: 'get' }
+		)
+	}
 }
