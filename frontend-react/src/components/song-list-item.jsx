@@ -13,6 +13,7 @@ const Text = styled.p`
 	width: 20%;
 	display: inline-block;
 	margin: 15px;
+	vertical-align: middle;
 `
 
 const ItemImage = styled.div`
