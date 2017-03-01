@@ -76,4 +76,27 @@ export default class PlaylistPureActions {
 			playlist
 		}
 	}
+
+	// DELETE playlist
+	static deleteRequest(playlist){
+		return {
+			type: reduxActions.DELETE_PLAYLIST_REQUEST,
+			playlist
+		}
+	}
+
+	static deleteFailure(playlist, error) {
+		return {
+			type: reduxActions.DELETE_PLAYLIST_ERROR,
+			playlist,
+			error
+		}
+	}
+
+	static deleteSuccess(playlist) {
+		return {
+			type: reduxActions.DELETE_PLAYLIST_SUCCESS,
+			playlist
+		}
+	}
 }

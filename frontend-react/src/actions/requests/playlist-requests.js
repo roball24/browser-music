@@ -24,4 +24,12 @@ export default class PlaylistRequests {
 			{ method: 'post' }
 		)
 	}
+
+	static delete(params){
+		var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
+		return fetch(
+			endpoints.PLAYLIST + '?' + paramString, 
+			{ method: 'delete' }
+		)
+	}
 }

@@ -38,7 +38,6 @@ class SongListItem extends React.Component {
 	}
 
 	componentWillMount(){
-		console.log(this.props.songData)
 		if (!this.props.songData.Artwork && !this.props.songData.fetchingArtwork 
 			&& !this.props.songData.fetchedArtwork && !this.props.songData.artworkError){
 			this.props.dispatch(

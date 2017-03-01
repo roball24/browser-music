@@ -22,7 +22,7 @@ class Navigator extends React.Component {
 function select(state){
 	return {
 		currentRoute: state.currentRoute,
-		theme: state.getTheme.data
+		theme: state.theme.data
 	}
 }
 

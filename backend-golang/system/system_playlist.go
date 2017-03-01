@@ -193,6 +193,7 @@ func (self *SystemPlaylist) AddSong(pStr string, songPath string) error {
 }
 
 func (self *SystemPlaylist) Delete(plistName string) error {
+	plistName = strings.Replace(plistName, " ", "_", -1)
 	fullPath := "../data/" + plistName + ".playlist"
 	if err := os.Remove(fullPath); err != nil {
 		return err

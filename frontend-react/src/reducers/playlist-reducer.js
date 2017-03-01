@@ -84,6 +84,14 @@ export function playlists(state = arrayState, action) {
 				})
 			};
 
+		// delete playlist
+		case reduxActions.DELETE_PLAYLIST_SUCCESS:
+			return {...state,
+				data: state.data.filter(p => {
+					return p.Name !== action.playlist
+				})
+			};
+
 		default:
 			return state;
 	}
@@ -111,6 +119,40 @@ export function addPlaylistState(state = defaultState, action){
 			};
 
 		case reduxActions.ADD_PLAYLIST_SUCCESS:
+			return {
+				...state,
+				fetching: false,
+				fetched: true,
+				playlist: action.playlist
+			};
+
+		default:
+			return state;
+	}
+}
+
+// delete playlist
+export function deletePlaylistState(state = defaultState, action){
+	switch (action.type){
+		case reduxActions.DELETE_PLAYLIST_REQUEST:
+			return {
+				...state,
+				fetching: true,
+				fetched: false,
+				playlist: action.playlist,
+				error: null
+			};
+
+		case reduxActions.DELETE_PLAYLIST_ERROR:
+			return {
+				...state,
+				fetching: false,
+				fetched: false,
+				playlist: action.playlist,
+				error: action.error.status
+			};
+
+		case reduxActions.DELETE_PLAYLIST_SUCCESS:
 			return {
 				...state,
 				fetching: false,
