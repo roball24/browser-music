@@ -3,9 +3,10 @@ package system
 import (
 	"BrowserMusic/backend-golang/errors"
 	"encoding/base64"
+	"io/ioutil"
+
 	id3 "github.com/mikkyang/id3-go"
 	"github.com/mikkyang/id3-go/v2"
-	"io/ioutil"
 )
 
 type ISystemMp3 interface {
@@ -21,10 +22,10 @@ func NewSystemMp3() *SystemMp3 {
 
 func (self *SystemMp3) GetArtwork(path string) ([]byte, error) {
 	tag, err := id3.Open("../library/" + path)
-	defer tag.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer tag.Close()
 
 	if artwork := tag.Frame("APIC"); artwork != nil {
 		return artwork.(*v2.ImageFrame).DataFrame.Data(), nil

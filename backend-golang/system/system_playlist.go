@@ -5,11 +5,12 @@ import (
 	"BrowserMusic/backend-golang/models"
 	"encoding/base64"
 	"encoding/json"
-	id3 "github.com/mikkyang/id3-go"
-	"github.com/mikkyang/id3-go/v2"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	id3 "github.com/mikkyang/id3-go"
+	"github.com/mikkyang/id3-go/v2"
 )
 
 type ISystemPlaylist interface {
@@ -253,10 +254,10 @@ func (self *SystemPlaylist) GetArtwork(pStr string) ([]byte, error) {
 
 	// return artwork of first song in playlist
 	tag, err := id3.Open("../library/" + playlist.SongPaths[0])
-	defer tag.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer tag.Close()
 
 	artwork := tag.Frame("APIC").(*v2.ImageFrame).DataFrame.Data()
 
