@@ -99,4 +99,56 @@ export default class PlaylistPureActions {
 			playlist
 		}
 	}
+
+	// DELETE song to playlist
+	static deleteSongRequest(playlist, song){
+		return {
+			type: reduxActions.DELETE_PLAYLIST_SONG_REQUEST,
+			playlist,
+			song
+		}
+	}
+
+	static deleteSongFailure(playlist, song, error) {
+		return {
+			type: reduxActions.DELETE_PLAYLIST_SONG_ERROR,
+			playlist,
+			song,
+			error
+		}
+	}
+
+	static deleteSongSuccess(playlist, song) {
+		return {
+			type: reduxActions.DELETE_PLAYLIST_SONG_SUCCESS,
+			playlist,
+			song
+		}
+	}
+
+	// POST song to playlist
+	static addSongRequest(playlist, song){
+		return {
+			type: reduxActions.ADD_PLAYLIST_SONG_REQUEST,
+			playlist,
+			song
+		}
+	}
+
+	static addSongFailure(playlist, song, error) {
+		return {
+			type: reduxActions.ADD_PLAYLIST_SONG_ERROR,
+			playlist,
+			song,
+			error
+		}
+	}
+
+	static addSongSuccess(playlist, song) {
+		return {
+			type: reduxActions.ADD_PLAYLIST_SONG_SUCCESS,
+			playlist,
+			song
+		}
+	}
 }

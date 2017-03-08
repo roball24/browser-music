@@ -32,4 +32,20 @@ export default class PlaylistRequests {
 			{ method: 'delete' }
 		)
 	}
+
+	static deleteSong(params){
+		var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
+		return fetch(
+			endpoints.PLAYLIST + '/songs?' + paramString,
+			{ method: 'delete' }
+		)
+	}
+
+	static addSong(params){
+		var paramString = Object.keys(params).map(k => k + '=' + params[k]).join('&');
+		return fetch(
+			endpoints.PLAYLIST + '/songs?' + paramString,
+			{ method: 'post' }
+		)
+	}
 }

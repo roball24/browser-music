@@ -1,5 +1,5 @@
 import { reduxActions } from '../constants';
-import { objectState } from './initial-states.js';
+import { objectState, defaultState } from './initial-states.js';
 
 export function songs(state = objectState, action) {
 	switch (action.type){
@@ -65,6 +65,51 @@ export function songs(state = objectState, action) {
 				return s;
 			});
 			return retArtworkState;
+
+		// delete song from playlist
+		case reduxActions.DELETE_PLAYLIST_SONG_SUCCESS:
+			return {...state,
+				data: state.data[action.playlist].filter(s => {
+					return s.Path !== action.song;
+				})
+			};
+
+		default:
+			return state;
+	}
+}
+
+// delete song from playlist
+export function deletePlaylistSongState(state = defaultState, action){
+	switch (action.type){
+		case reduxActions.DELETE_PLAYLIST_SONG_REQUEST:
+			return {
+				...state,
+				fetching: true,
+				fetched: false,
+				playlist: action.playlist,
+				song: action.song,
+				error: null
+			};
+
+		case reduxActions.DELETE_PLAYLIST_SONG_ERROR:
+			return {
+				...state,
+				fetching: false,
+				fetched: false,
+				playlist: action.playlist,
+				song: action.song,
+				error: action.error.status
+			};
+
+		case reduxActions.DELETE_PLAYLIST_SONG_SUCCESS:
+			return {
+				...state,
+				fetching: false,
+				fetched: true,
+				playlist: action.playlist,
+				song: action.song
+			};
 
 		default:
 			return state;

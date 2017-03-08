@@ -88,7 +88,7 @@ export function playlists(state = arrayState, action) {
 		case reduxActions.DELETE_PLAYLIST_SUCCESS:
 			return {...state,
 				data: state.data.filter(p => {
-					return p.Name !== action.playlist
+					return p.Name !== action.playlist;
 				})
 			};
 

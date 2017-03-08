@@ -56,4 +56,17 @@ export default class PlaylistThunks {
 			})
 		}
 	}
+
+	static deleteSong(playlist, song){
+		return dispatch => {
+			dispatch(PlaylistPureActions.deleteSongRequest(playlist, song));
+			return PlaylistRequests.deleteSong({playlist, song}).then(response => {
+				if (response.status == 200){
+					dispatch(PlaylistPureActions.deleteSongSuccess(playlist, song));
+				} else {
+					dispatch(PlaylistPureActions.deleteSongFailure(playlist, song, response));
+				}
+			})
+		}
+	}
 }
