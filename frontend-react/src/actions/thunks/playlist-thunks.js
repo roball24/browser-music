@@ -69,4 +69,18 @@ export default class PlaylistThunks {
 			})
 		}
 	}
+
+	static addSong(playlist, song){
+		return dispatch => {
+			dispatch(PlaylistPureActions.addSongRequest(playlist, song));
+			return PlaylistRequests.addSong({playlist, song}).then(response => {
+				if (response.status == 200){
+					dispatch(PlaylistPureActions.addSongSuccess(playlist, song));
+				} else {
+					dispatch(PlaylistPureActions.addSongFailure(playlist, song, response));
+				}
+			})
+		}
+	}
+
 }

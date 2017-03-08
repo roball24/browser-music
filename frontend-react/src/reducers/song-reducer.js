@@ -68,11 +68,19 @@ export function songs(state = objectState, action) {
 
 		// delete song from playlist
 		case reduxActions.DELETE_PLAYLIST_SONG_SUCCESS:
-			return {...state,
-				data: state.data[action.playlist].filter(s => {
-					return s.Path !== action.song;
-				})
-			};
+			var deleteSongState = { ...state };
+			deleteSongState.data[action.playlist] = state.data[action.playlist].filter(s => { 
+				return s.Path !== action.song; 
+			});
+			return deleteSongState;
+
+		// add song to playlist
+		case reduxActions.ADD_PLAYLIST_SONG_SUCCESS:
+			var addSongState = { ...state };
+			addSongState.data[action.playlist] = state.data[action.playlist].concat(
+				state.data['All Songs'].find(s => { return s.Path == action.song })
+			)
+			return addSongState;
 
 		default:
 			return state;
