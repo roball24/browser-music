@@ -25,7 +25,7 @@ export function playlists(state = arrayState, action) {
 			return {
 				...state,
 				fetching: false,
-				fetched: false,
+				fetched: true,
 				error: action.error.status
 			};
 
@@ -55,7 +55,7 @@ export function playlists(state = arrayState, action) {
 					data: state.data.map(d => {
 						if (d.Name == action.playlist) {
 							d.fetchingArtwork = false;
-							d.fetchedArtwork = false;
+							d.fetchedArtwork = true;
 							d.artError = action.error.status;
 						}
 						return d
@@ -113,7 +113,7 @@ export function addPlaylistState(state = defaultState, action){
 			return {
 				...state,
 				fetching: false,
-				fetched: false,
+				fetched: true,
 				playlist: action.playlist,
 				error: action.error.status
 			};
@@ -147,7 +147,7 @@ export function deletePlaylistState(state = defaultState, action){
 			return {
 				...state,
 				fetching: false,
-				fetched: false,
+				fetched: true,
 				playlist: action.playlist,
 				error: action.error.status
 			};

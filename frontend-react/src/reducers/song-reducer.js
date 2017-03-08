@@ -16,7 +16,7 @@ export function songs(state = objectState, action) {
 			return {
 				...state,
 				fetching: false,
-				fetched: false,
+				fetched: true,
 				error: action.error.status
 			};
 
@@ -47,7 +47,7 @@ export function songs(state = objectState, action) {
 			artworkEState.data[action.playlist].map(s => {
 				if (s.Path == action.song){
 					s.fetchingArtwork = false;
-					s.fetchedArtwork = false;
+					s.fetchedArtwork = true;
 					s.artError = action.error.status;
 				}
 				return s;
@@ -77,7 +77,8 @@ export function songs(state = objectState, action) {
 		// add song to playlist
 		case reduxActions.ADD_PLAYLIST_SONG_SUCCESS:
 			var addSongState = { ...state };
-			addSongState.data[action.playlist] = state.data[action.playlist].concat(
+			var pSongs = state.data[action.playlist] || [];
+			addSongState.data[action.playlist] = pSongs.concat(
 				state.data['All Songs'].find(s => { return s.Path == action.song })
 			)
 			return addSongState;
@@ -104,7 +105,7 @@ export function deletePlaylistSongState(state = defaultState, action){
 			return {
 				...state,
 				fetching: false,
-				fetched: false,
+				fetched: true,
 				playlist: action.playlist,
 				song: action.song,
 				error: action.error.status

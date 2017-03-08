@@ -34,8 +34,7 @@ const H3 = styled.h3`
 `
 
 const Icon = styled.svg`
-	position: relative;
-	top: 2px;
+	verticalAlign: middle;
 	height: 20px;
 	width: 20px;
 	fill: ${props => props.theme.Background1};
@@ -109,7 +108,12 @@ class SongList extends React.Component {
 						S392.8,299.7,510.5,231S756.7,128,896,128s267.8,34.3,385.5,103s210.8,161.8,279.5,279.5S1664,756.7,1664,896z"/>
 					</Icon>
 					{ this.state.addingSong ? (
-						<Selector onChange={this.selectChange} onBlur={this.toggleAddingSong} options={options} />
+						<Selector 
+							onChange={this.selectChange}
+							onBlur={this.toggleAddingSong}
+							options={options} 
+							placeholder="Add Song to Playlist"
+						/>
 						) : (
 						<Icon onClick={this.toggleAddingSong}
 							version="1.1" id="Layer_1" x="0px" y="0px" aria-label="add song to playlist"

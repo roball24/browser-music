@@ -68,7 +68,7 @@ class SongListItem extends React.Component {
 	}
 
 	render(){
-		if (this.props.songData.Artwork && this.props.songData.Artwork.size){
+		if (!this.state.imgUrl && this.props.songData.Artwork){
 			this.state.imgUrl = URL.createObjectURL(this.props.songData.Artwork);
 		}
 		return (
