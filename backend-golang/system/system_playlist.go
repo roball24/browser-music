@@ -259,7 +259,9 @@ func (self *SystemPlaylist) GetArtwork(pStr string) ([]byte, error) {
 	}
 	defer tag.Close()
 
-	artwork := tag.Frame("APIC").(*v2.ImageFrame).DataFrame.Data()
+	if artwork := tag.Frame("APIC"); artwork != nil {
+		return artwork.(*v2.ImageFrame).DataFrame.Data(), nil
+	}
 
-	return artwork, nil
+	return nil, nil
 }

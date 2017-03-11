@@ -5,8 +5,9 @@ import (
 	"BrowserMusic/backend-golang/errors"
 	"BrowserMusic/backend-golang/system"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type PlaylistController struct {
@@ -132,6 +133,11 @@ func (self *PlaylistController) getArtwork(c *gin.Context) {
 	artwork, err := self.systemPlaylist.GetArtwork(playlist)
 	if err != nil {
 		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+
+	if artwork == nil {
+		c.Writer.WriteHeader(http.StatusNoContent)
 		return
 	}
 

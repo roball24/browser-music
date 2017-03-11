@@ -1,7 +1,6 @@
 package system
 
 import (
-	"BrowserMusic/backend-golang/errors"
 	"encoding/base64"
 	"io/ioutil"
 
@@ -31,7 +30,7 @@ func (self *SystemMp3) GetArtwork(path string) ([]byte, error) {
 		return artwork.(*v2.ImageFrame).DataFrame.Data(), nil
 	}
 
-	return nil, errors.New("Artwork frame is nil")
+	return nil, nil
 }
 
 func (self *SystemMp3) Load(path string) (string, error) {

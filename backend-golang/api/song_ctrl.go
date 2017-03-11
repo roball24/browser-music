@@ -4,8 +4,9 @@ import (
 	"BrowserMusic/backend-golang/config"
 	"BrowserMusic/backend-golang/errors"
 	"BrowserMusic/backend-golang/system"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type SongController struct {
@@ -47,6 +48,11 @@ func (self *SongController) getArtwork(c *gin.Context) {
 	artwork, err := self.systemMp3.GetArtwork(path)
 	if err != nil {
 		errors.Response(c, http.StatusInternalServerError, err.Error(), err)
+		return
+	}
+
+	if artwork == nil {
+		c.Writer.WriteHeader(http.StatusNoContent)
 		return
 	}
 
