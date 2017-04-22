@@ -1,9 +1,9 @@
 package main
 
 import (
-	"BrowserMusic/backend-golang/api"
-	"BrowserMusic/backend-golang/config"
-	"BrowserMusic/backend-golang/system"
+	"github.com/roball24/browser-music/backend-golang/api"
+	"github.com/roball24/browser-music/backend-golang/config"
+	"github.com/roball24/browser-music/backend-golang/system"
 )
 
 func main() {

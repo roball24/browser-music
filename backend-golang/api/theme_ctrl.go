@@ -1,12 +1,13 @@
 package api
 
 import (
-	"BrowserMusic/backend-golang/config"
-	"BrowserMusic/backend-golang/errors"
-	"BrowserMusic/backend-golang/models"
-	"BrowserMusic/backend-golang/system"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/roball24/browser-music/backend-golang/config"
+	"github.com/roball24/browser-music/backend-golang/errors"
+	"github.com/roball24/browser-music/backend-golang/models"
+	"github.com/roball24/browser-music/backend-golang/system"
 )
 
 type ThemeController struct {

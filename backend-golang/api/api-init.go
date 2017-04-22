@@ -1,9 +1,10 @@
 package api
 
 import (
-	"BrowserMusic/backend-golang/config"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/gin-gonic/gin"
+	"github.com/roball24/browser-music/backend-golang/config"
 )
 
 var (

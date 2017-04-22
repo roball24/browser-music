@@ -1,9 +1,10 @@
 package system
 
 import (
-	"BrowserMusic/backend-golang/models"
 	"encoding/json"
 	"io/ioutil"
+
+	"github.com/roball24/browser-music/backend-golang/models"
 )
 
 type ISystemTheme interface {

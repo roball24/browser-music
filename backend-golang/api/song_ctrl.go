@@ -1,10 +1,11 @@
 package api
 
 import (
-	"BrowserMusic/backend-golang/config"
-	"BrowserMusic/backend-golang/errors"
-	"BrowserMusic/backend-golang/system"
 	"net/http"
+
+	"github.com/roball24/browser-music/backend-golang/config"
+	"github.com/roball24/browser-music/backend-golang/errors"
+	"github.com/roball24/browser-music/backend-golang/system"
 
 	"github.com/gin-gonic/gin"
 )

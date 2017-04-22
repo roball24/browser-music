@@ -1,13 +1,14 @@
 package system
 
 import (
-	"BrowserMusic/backend-golang/errors"
-	"BrowserMusic/backend-golang/models"
 	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/roball24/browser-music/backend-golang/errors"
+	"github.com/roball24/browser-music/backend-golang/models"
 
 	id3 "github.com/mikkyang/id3-go"
 	"github.com/mikkyang/id3-go/v2"
