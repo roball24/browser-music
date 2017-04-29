@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { RouteActions } from '../actions';
+import { push } from 'react-router-redux';
+import styled from 'styled-components';
+
 import { routes } from '../constants';
 import { Sidebar, ContentBar, SongList } from '../components';
-import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
@@ -22,8 +23,8 @@ const MainWrapper = styled.div`
 
 class HomePage extends React.Component {
 
-    componentWillMount(){
-        this.props.dispatch(RouteActions.setAppRoute(routes.HOME));
+    componentDidMount() {
+        this.props.dispatch(push(routes.HOME));
     }
 
     render () {

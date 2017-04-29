@@ -1,20 +1,12 @@
 import { combineReducers } from 'redux';
-import { reduxActions } from '../constants';
+import { routerReducer } from 'react-router-redux';
+
 import { theme } from './theme-reducer.js';
 import { currentPlaylist, playlists, addPlaylistState, deletePlaylistState } from './playlist-reducer.js';
 import { songs, deletePlaylistSongState } from './song-reducer.js';
 
-function currentRoute(state = '', action) {
-    switch (action.type) {
-        case reduxActions.SET_APP_ROUTE:
-            return action.route;
-        default:
-            return state;
-    }
-}
-
 const rootReducer = combineReducers({
-	currentRoute,
+	router: routerReducer,
 	theme,
 	currentPlaylist,
     playlists,

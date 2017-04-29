@@ -1,4 +1,4 @@
-const Theme = {
+export default {
 	Primary1: '',
 	Primary2: '',
 	Primary3: '',
@@ -8,8 +8,6 @@ const Theme = {
 	Background1: '',
 	Background2: ''
 };
-
-export default Theme;
 
 /*
 #26CDFF // p1

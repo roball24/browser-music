@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { RouteActions } from '../actions';
+import { push } from 'react-router-redux';
+import { Link } from 'react-router-dom';
+
 import { routes } from '../constants';
 
 class SettingsPage extends React.Component {
 
-    componentWillMount(){
-        this.props.dispatch(RouteActions.setAppRoute(routes.SETTINGS));
-
+    componentDidMount() {
+        this.props.dispatch(push(routes.SETTINGS));
     }
 
     render () {
         return (
             <Link to={routes.HOME}>
-            <div>Settings</div>
+                <div>Settings</div>
             </Link>
         );
     }

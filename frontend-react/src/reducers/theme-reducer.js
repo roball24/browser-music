@@ -1,7 +1,13 @@
 import { reduxActions } from '../constants';
 import { objectState } from './initial-states.js';
+import Theme from '../styles';
 
-export function theme(state = objectState, action) {
+const defaultTheme = {
+	...objectState,
+	data: Theme
+}
+
+export function theme(state = defaultTheme, action) {
 	switch (action.type){
 		case reduxActions.GET_THEME_REQUEST:
 			return {...state, fetching: true, fetched: false, error: null}

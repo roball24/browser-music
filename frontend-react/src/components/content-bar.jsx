@@ -1,7 +1,7 @@
 import React from 'react';
 import Measure from 'react-measure';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { routes } from '../constants';
 
