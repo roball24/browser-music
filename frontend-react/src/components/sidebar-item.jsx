@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Image = styled.img`
 	height: 100%;
 	width: 100%;
-`
+`;
 
 const Item = styled.div`
     background-color: ${props => props.theme.Background1};
@@ -16,12 +16,12 @@ const Item = styled.div`
     vertical-align: middle;
     position: relative;
     cursor: pointer;
-	${props => props.selected ? 'filter: brightness(150%);' : ''}
+	${props => (props.selected ? 'filter: brightness(150%);' : '')}
 
     &:hover {
         filter: brightness(150%);
     }
-`
+`;
 
 const ItemImage = styled.div`
     position: relative;
@@ -31,7 +31,7 @@ const ItemImage = styled.div`
     height: 60px;
     background-color: ${props => props.theme.Secondary3};
     display: inline-block;
-`
+`;
 
 const ItemContent = styled.div`
     display: inline-block;
@@ -39,52 +39,57 @@ const ItemContent = styled.div`
     top: -18px;
     padding-left: 20px;
     font-size: 20px;
-`
+`;
 
 class SidebarItem extends React.Component {
-	constructor(){
-		super();
-		this.state = { imgUrl: '' };
-		this.selectPlaylist = this.selectPlaylist.bind(this);
-	}
+    constructor() {
+        super();
+        this.state = { imgUrl: '' };
+        this.selectPlaylist = this.selectPlaylist.bind(this);
+    }
 
-	componentWillMount(){
-		if (!this.props.plst.fetchingArtwork && !this.props.plst.fetchedArtwork){
-			this.props.dispatch(PlaylistThunks.getArtwork(this.props.plst.Name));
-		}
-	}
+    componentWillMount() {
+        if (
+            !this.props.plst.fetchingArtwork &&
+            !this.props.plst.fetchedArtwork
+        ) {
+            this.props.dispatch(
+                PlaylistThunks.getArtwork(this.props.plst.Name)
+            );
+        }
+    }
 
-	selectPlaylist(){
-		this.props.dispatch(PlaylistPureActions.selectPlaylist(this.props.plst.Name));
-	}
+    selectPlaylist() {
+        this.props.dispatch(
+            PlaylistPureActions.selectPlaylist(this.props.plst.Name)
+        );
+    }
 
-	render () {
-		if (this.props.plst.Artwork && this.props.plst.Artwork.size){
-			this.state.imgUrl = URL.createObjectURL(this.props.plst.Artwork);
-		}
-		return (
-			<Item 
-				onClick={this.selectPlaylist} 
-				selected={this.props.currentPlaylist == this.props.plst.Name}
-			>
-				<ItemImage>
-					{this.state.imgUrl &&
-						<Image src={this.state.imgUrl}/>
-					}
-				</ItemImage>
-				<ItemContent>
-					{this.props.plst.Name.replace('_', ' ')}
-				</ItemContent>
-			</Item>
-		);
-	}
+    render() {
+        if (this.props.plst.Artwork && this.props.plst.Artwork.size) {
+            this.state.imgUrl = URL.createObjectURL(this.props.plst.Artwork);
+        }
+        return (
+            <Item
+                onClick={this.selectPlaylist}
+                selected={this.props.currentPlaylist == this.props.plst.Name}
+            >
+                <ItemImage>
+                    {this.state.imgUrl && <Image src={this.state.imgUrl} />}
+                </ItemImage>
+                <ItemContent>
+                    {this.props.plst.Name.replace('_', ' ')}
+                </ItemContent>
+            </Item>
+        );
+    }
 }
 
-function select(state){
-	return {
-		playlists: state.playlists.data,
-		currentPlaylist: state.currentPlaylist
-	}
+function select(state) {
+    return {
+        playlists: state.playlists.data,
+        currentPlaylist: state.currentPlaylist
+    };
 }
 
 export default connect(select)(SidebarItem);

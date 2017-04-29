@@ -11,7 +11,7 @@ const Container = styled.div`
     height: 100%;
     overflow: hidden;
     position: relative;
-`
+`;
 
 const MainWrapper = styled.div`
     display: flex;
@@ -19,20 +19,19 @@ const MainWrapper = styled.div`
     flex: 3;
     overflow: hidden;
     height: 100%;
-`
+`;
 
 class HomePage extends React.Component {
-
     componentDidMount() {
         this.props.dispatch(push(routes.HOME));
     }
 
-    render () {
+    render() {
         return (
             <Container>
                 <Sidebar />
                 <MainWrapper>
-                    <ContentBar/>
+                    <ContentBar />
                     <SongList />
                 </MainWrapper>
             </Container>
@@ -40,10 +39,10 @@ class HomePage extends React.Component {
     }
 }
 
-function select(state){
+function select(state) {
     return {
         currentRoute: state.currentRoute
-    }
+    };
 }
 
 export default connect(select)(HomePage);

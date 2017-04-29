@@ -13,12 +13,12 @@ const Item = styled.div`
     margin: 3px 0px;
     vertical-align: middle;
     position: relative;
-	cursor: ${props => props.clicked ? 'text' : 'pointer'};
+	cursor: ${props => (props.clicked ? 'text' : 'pointer')};
     
     &:hover {
         filter: brightness(150%);
     }
-`
+`;
 
 const ItemContent = styled.div`
 	text-align: center;
@@ -26,7 +26,7 @@ const ItemContent = styled.div`
     position: relative;
     font-size: 20px;
     top: 22px;
-`
+`;
 
 const TextField = styled.input`
 	color: ${props => props.theme.Background1};
@@ -38,88 +38,93 @@ const TextField = styled.input`
     margin: 3px 7px;
     height: 90%;
     width: 95%;
-`
+`;
 
 const AddInfo = styled.p`
 	text-align: center;
-`
+`;
 
 class AddPlaylistItem extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            adding: false,
+            textValue: ''
+        };
+        this.handleClick = this.handleClick.bind(this);
+        this.doneAdding = this.doneAdding.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+    }
 
-	constructor() {
-		super();
-		this.state = { 
-			adding: false,
-			textValue: ''
-		};
-		this.handleClick = this.handleClick.bind(this);
-		this.doneAdding = this.doneAdding.bind(this);
-		this.handleTextChange = this.handleTextChange.bind(this);
-	}
+    doneAdding() {
+        this.setState({ adding: false });
+    }
 
-	doneAdding(){
-		this.setState({ adding: false });
-	}
+    handleClick() {
+        this.setState(
+            prevState => ({
+                adding: !prevState.adding
+            }),
+            () => {
+                if (this.state.adding) {
+                    ReactDOM.findDOMNode(this.refs.textField).focus();
+                }
+            }
+        );
+    }
 
-	handleClick(){
-		this.setState(prevState => ({
-			adding: !prevState.adding
-		}), ()=> {
-			if (this.state.adding){
-				ReactDOM.findDOMNode(this.refs.textField).focus()
-			}
-		})
-	}
+    handleKeyPress(e) {
+        if (e.key == 'Enter') {
+            if (this.state.textValue == '') return;
+            this.props.dispatch(PlaylistThunks.add(this.state.textValue));
+            this.setState({ textValue: '' });
+            this.doneAdding();
+        }
 
-	handleKeyPress(e){
-		if (e.key == 'Enter'){
-			if (this.state.textValue == '') return;
-			this.props.dispatch(PlaylistThunks.add(this.state.textValue));
-			this.setState({ textValue: '' });
-			this.doneAdding();
-		}
+        if (e.key == 'Escape' || e.key == 'Esc') {
+            this.doneAdding();
+        }
+    }
 
-		if (e.key == 'Escape' || e.key == 'Esc') {
-			this.doneAdding();
-		}
-	}
+    handleTextChange(e) {
+        this.setState({ textValue: e.target.value });
+    }
 
-	handleTextChange(e){
-		this.setState({ textValue: e.target.value });
-	}
+    render() {
+        return (
+            <Item
+                tabIndex="1"
+                onClick={this.handleClick}
+                onKeyDown={e => {
+                    this.handleKeyPress(e);
+                }}
+            >
+                {this.state.adding
+                    ? <TextField
+                          ref="textField"
+                          type="text"
+                          value={this.state.textValue}
+                          onBlur={this.doneAdding}
+                          onClick={e => {
+                              e.stopPropagation();
+                          }}
+                          onChange={e => {
+                              this.handleTextChange(e);
+                          }}
+                      />
+                    : <ItemContent>Add Playlist</ItemContent>}
 
-	render () {
-		return (
-			<Item 
-				tabIndex="1" 
-				onClick={this.handleClick} 
-				onKeyDown={e=>{this.handleKeyPress(e)}} 
-			>
-				{ this.state.adding ? (
-				<TextField 
-					ref="textField"
-					type="text" 
-					value={this.state.textValue}
-					onBlur={this.doneAdding}
-					onClick={e=>{e.stopPropagation()}}
-					onChange={e=>{this.handleTextChange(e)}}
-				/>
-				) : (
-				<ItemContent>Add Playlist</ItemContent>
-				)}
-
-				{this.state.adding &&
-				<AddInfo>Enter to Add, Esc to exit</AddInfo>
-				}
-			</Item>
-		);
-	}
+                {this.state.adding &&
+                    <AddInfo>Enter to Add, Esc to exit</AddInfo>}
+            </Item>
+        );
+    }
 }
 
-function select(state){
-	return {
-		addPlaylistState: state.addPlaylistState
-	}
+function select(state) {
+    return {
+        addPlaylistState: state.addPlaylistState
+    };
 }
 
 export default connect(select)(AddPlaylistItem);

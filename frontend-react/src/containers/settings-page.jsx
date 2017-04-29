@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom';
 import { routes } from '../constants';
 
 class SettingsPage extends React.Component {
-
     componentDidMount() {
         this.props.dispatch(push(routes.SETTINGS));
     }
 
-    render () {
+    render() {
         return (
             <Link to={routes.HOME}>
                 <div>Settings</div>
@@ -20,10 +19,10 @@ class SettingsPage extends React.Component {
     }
 }
 
-function select(state){
+function select(state) {
     return {
         currentRoute: state.currentRoute
-    }
+    };
 }
 
 export default connect(select)(SettingsPage);

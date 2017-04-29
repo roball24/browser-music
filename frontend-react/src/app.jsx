@@ -18,19 +18,20 @@ import { Navigator, HomePage, SettingsPage } from './containers';
 
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
-let store = applyMiddleware(thunkMiddleware, routeMiddleware)(createStore)(reducers);
+let store = applyMiddleware(thunkMiddleware, routeMiddleware)(createStore)(
+    reducers
+);
 
 window.s = store;
 
-render((
-	<Provider store={store}>
-		<ConnectedRouter history={history}>
+render(
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
             <Navigator>
-                <Route exact path={routes.HOME} component={HomePage}/>
-                <Route path={routes.SETTINGS} component={SettingsPage}/>
+                <Route exact path={routes.HOME} component={HomePage} />
+                <Route path={routes.SETTINGS} component={SettingsPage} />
             </Navigator>
         </ConnectedRouter>
-	</Provider>
-), document.getElementById('app'))
-
-            
+    </Provider>,
+    document.getElementById('app')
+);

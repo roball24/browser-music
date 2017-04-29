@@ -1,5 +1,5 @@
 // react-router routes
 export default {
-	HOME: '/',
-	SETTINGS: '/settings'
+    HOME: '/',
+    SETTINGS: '/settings'
 };

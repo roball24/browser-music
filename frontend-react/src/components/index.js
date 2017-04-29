@@ -6,10 +6,10 @@ import SongList from './song-list.jsx';
 import SongListItem from './song-list-item.jsx';
 
 export {
-	Sidebar,
-	SidebarItem,
-	AddPlaylistItem,
-	ContentBar,
-	SongList,
-	SongListItem
-}
+    Sidebar,
+    SidebarItem,
+    AddPlaylistItem,
+    ContentBar,
+    SongList,
+    SongListItem
+};

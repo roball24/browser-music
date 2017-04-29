@@ -51,6 +51,7 @@
     "fetch-intercept": "^2.2.0",
     "history": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
+    "prettier": "^1.2.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-measure": "^1.4.5",
