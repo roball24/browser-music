@@ -1,0 +1,12 @@
+version: '3'
+services:
+  server:
+    build: .
+    image: browser_music
+    ports:
+      - "9090:9090"
+    volumes:
+      - .:/go/src/github.com/roball24/browser-music/backend-golang
+      - ./data:/go/src/github.com/roball24/browser-music/data
+      - ./library:/go/src/github.com/roball24/browser-music/library
+    restart: always

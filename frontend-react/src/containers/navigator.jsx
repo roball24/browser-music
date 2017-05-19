@@ -12,7 +12,8 @@ const Wrapper = styled.div`
 `;
 
 class Navigator extends React.Component {
-    componentWillMount() {
+    
+    componentDidMount() {
         this.props.dispatch(ThemeThunks.getTheme());
     }
 
